@@ -1,7 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Symbolic Player</title></head>
+<head>
+<meta charset="UTF-8">
+<title>symbolic</title>
+</head>
 <body>
-  symbolic-player works!
+
+<button id="start">play</button>
+
+<audio id="player"></audio>
+
+<script>
+const tracks = [
+  "chancesimustwaste.mp3",
+  "devilbitesdirty.mp3",
+  "eattheirownbabies.mp3",
+  "giveup2lust.mp3",
+  "onbothsides.mp3",
+  "rottenandsobeautiful.mp3"
+];
+
+// shuffle
+tracks.sort(() => Math.random() - 0.5);
+
+let i = 0;
+const player = document.getElementById("player");
+const btn = document.getElementById("start");
+
+function playNext() {
+  player.src = tracks[i];
+  player.play();
+}
+
+player.onended = () => {
+  i = (i + 1) % tracks.length;
+  playNext();
+};
+
+btn.onclick = () => {
+  btn.remove(); // hides button after first tap
+  playNext();
+};
+</script>
+
 </body>
 </html>
